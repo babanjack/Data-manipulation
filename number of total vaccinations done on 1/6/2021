@@ -1,3 +1,0 @@
-total_vac <- vaccination_data_imputed %>% 
-  filter(date=="1/6/2021") %>% 
-   summarise(total=sum(daily_vaccinations))
