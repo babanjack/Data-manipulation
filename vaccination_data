@@ -1,0 +1,12 @@
+library(dplyr)
+
+# Impute missing daily vaccination numbers per country with the minimum of relevant countries
+vaccination_data_imputed <- vaccination_data %>%
+  group_by(country) %>%
+  mutate(daily_vaccinations_imputed = ifelse(is.na(daily_vaccinations),
+                                             min(na.omit(daily_vaccinations)), 
+                                             daily_vaccinations)) %>%
+  ungroup() %>%
+  select(-daily_vaccinations) %>%
+  rename(daily_vaccinations = daily_vaccinations_imputed)
+vaccination_data_imputed$daily_vaccinations[is.infinite(vaccination_data_imputed$daily_vaccinations)] <- 0
