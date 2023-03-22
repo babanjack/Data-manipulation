@@ -1,0 +1,5 @@
+Top3 <- vaccination_data_imputed %>% 
+        group_by(country) %>% 
+        summarise(median_daily_vac=median(daily_vaccinations)) %>% 
+        arrange(desc(median_daily_vac)) %>% 
+  head(3)
